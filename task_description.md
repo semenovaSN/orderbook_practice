@@ -44,3 +44,18 @@ book.add_order("sell", 10.75, 30)
 book.get_bids()  # [{"price": 10.50, "quantity": 50}, {"price": 10.00, "quantity": 100}]
 book.get_asks()  # [{"price": 10.75, "quantity": 30}, {"price": 11.00, "quantity": 80}]
 ```
+
+## Testing
+
+A basic test file `test_order_book.py` is provided with one starter test per round.
+
+You should extend it with more test cases.
+
+Think about:
+- Edge cases (zero? negative? what can go wrong?)
+- Multiple orders at the same price etc
+
+Run your tests with:
+```bash
+python3 -m pytest test_order_book.py
+```
