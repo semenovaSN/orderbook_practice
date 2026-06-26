@@ -12,10 +12,10 @@ from order_book import OrderBook
 
 def test_add_single_buy():
     book = OrderBook()
-  
+
     book.add_order("buy", 10.00, 100)
     bids = book.get_bids()
-  
+
     assert len(bids) == 1
     assert bids[0]["price"] == 10.00
     assert bids[0]["quantity"] == 100

@@ -17,9 +17,7 @@ class OrderBook:
         # TODO: Initialize your data structures
         pass
 
-    # ------------------------------------------------------------------
     # Round 1: Add orders and return them sorted
-    # ------------------------------------------------------------------
 
     def add_order(self, side: str, price: float, quantity: int) -> None:
         """
@@ -37,7 +35,7 @@ class OrderBook:
         """Return current sell orders, sorted lowest price first."""
         # TODO
         return []
-   
+
 
 # You can use this to test manually while developing
 if __name__ == "__main__":

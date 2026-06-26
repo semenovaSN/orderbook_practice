@@ -11,8 +11,7 @@ At any given moment, there are two groups of traders:
 Each trader submits an **order** saying: "I want to buy/sell X shares at $Y per share."
 These orders don't execute immediately, they go into a queue called the **order book**, where they wait until someone on the other side is willing to trade at a compatible price.
 
-The order book is the core data structure that sits at the heart of every stock exchange and trading platform. Its job is simple: collect orders from
-buyers and sellers, and whenever a buyer's price meets or exceeds a seller's price, execute a trade between them.
+The order book is the core data structure that sits at the heart of every stock exchange and trading platform. Its job is simple: collect orders from buyers and sellers, and whenever a buyer's price meets or exceeds a seller's price, execute a trade between them.
 
 ### Key terms
 
@@ -54,6 +53,13 @@ You should extend it with more test cases.
 Think about:
 - Edge cases (zero? negative? what can go wrong?)
 - Multiple orders at the same price etc
+
+Prepare environment. In the project directory run:
+```bash
+python3 -m venv venv
+source ./venv/bin/activate
+python3 -m pip install -r requirements.txt
+```
 
 Run your tests with:
 ```bash
