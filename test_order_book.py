@@ -107,3 +107,30 @@ def test_invalid_input():
 
     bids = book.get_bids()
     assert len(bids) == 0
+
+def test_valid_trade():
+    book = OrderBook()
+
+    book.add_order("buy", 14.00, 70)
+    book.add_order("sell", 12.00, 70)
+
+    book.add_order("sell", 12.00, 70)
+    book.add_order("buy", 18.00, 70)
+
+    book.add_order("sell", 12.00, 70)
+    book.add_order("sell", 8.00, 70)
+    book.add_order("buy", 18.00, 70)
+    trades = book.get_trades()
+    asks = book.get_asks()
+
+    assert len(trades) == 3
+    assert len(asks) == 1
+
+    assert trades[0]["price"] == 14.00
+    assert trades[0]["quantity"] == 70
+
+    assert trades[1]["price"] == 12.00
+    assert trades[1]["quantity"] == 70
+
+    assert trades[2]["price"] == 8.00
+    assert trades[2]["quantity"] == 70

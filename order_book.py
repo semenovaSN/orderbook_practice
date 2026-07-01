@@ -16,9 +16,6 @@ class OrderBook:
 
     def __init__(self, side=None, price=0.0, quantity=0) -> None:
         # TODO: Initialize your data structures
-        self.side = side
-        self.price = price
-        self.quantity = quantity
         self.bids = []
         self.asks = []
         self.trades = []
@@ -41,34 +38,43 @@ class OrderBook:
 
         if side == "buy":
             self.bids.append({"price": price, "quantity": quantity})
+            self.bids = sorted(self.bids, key=lambda d: d['price'], reverse=True)
+            self.asks = sorted(self.asks, key=lambda d: d['price'])
 
             for i in self.asks:
-                if i["price"] < price:
+                if i["price"] <= price:
                     trade(self, i["price"], i["quantity"])
                     self.asks.remove(i)
                     self.bids.remove({"price": price, "quantity": quantity})
+                    self.bids = sorted(self.bids, key=lambda d: d['price'])
+                    self.asks = sorted(self.asks, key=lambda d: d['price'], reverse=True)
                     break
 
-            sorted_list = sorted(self.bids, key=lambda d: d['price'])
+            self.bids = sorted(self.bids, key=lambda d: d['price'])
                 #print("sort true:", sorted_list)
 
-            return sorted_list
+            return self.bids
 
         elif side == "sell":
             self.asks.append({"price": price, "quantity": quantity})
+
+            self.bids = sorted(self.bids, key=lambda d: d['price'], reverse=True)
+            self.asks = sorted(self.asks, key=lambda d: d['price'])
 
             for i in self.bids:
                 if i["price"] >= price:
                     trade(self, i["price"], i["quantity"])
                     self.bids.remove(i)
                     self.asks.remove({"price": price, "quantity": quantity})
+                    self.bids = sorted(self.bids, key=lambda d: d['price'])
+                    self.asks = sorted(self.asks, key=lambda d: d['price'], reverse=True)
                     break
 
 
-            sorted_list = sorted(self.asks, key=lambda d: d['price'], reverse=True)
+            self.asks = sorted(self.asks, key=lambda d: d['price'], reverse=True)
                 #print("sort true:", sorted_list)
 
-            return sorted_list
+            return self.asks
 
 
     def get_trades(self):
@@ -91,12 +97,10 @@ class OrderBook:
 if __name__ == "__main__":
     book = OrderBook()
 
-    book.add_order("buy", 10.00, 100)
-    book.add_order("buy", 11.50, 100)
-    book.add_order("sell", 10.30, 100)
-    book.add_order("sell", 11.85, 100)
-    book.add_order("buy", 10.5, 100)
-    book.add_order("sell", 10.25, 100)
+    book.add_order("sell", 10.0, 100)
+    book.add_order("sell", 5.0, 100)
+    book.add_order("sell", 100.0, 100)
+    book.add_order("buy", 1000.0, 100)
 
     print("Bids:", book.get_bids())
     print("Asks:", book.get_asks())
