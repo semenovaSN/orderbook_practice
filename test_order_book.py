@@ -20,6 +20,53 @@ def test_add_single_buy():
     assert bids[0]["price"] == 10.00
     assert bids[0]["quantity"] == 100
 
+def test_right_order_buys():
+    book = OrderBook()
+
+    book.add_order("buy", 12.00, 70)
+    book.add_order("buy", 14.00, 70)
+    book.add_order("buy", 8.00, 70)
+    book.add_order("buy", 10.00, 70)
+    bids = book.get_bids()
+
+    assert len(bids) == 4
+
+    assert bids[0]["price"] == 8.00
+    assert bids[0]["quantity"] == 70
+
+    assert bids[1]["price"] == 10.00
+    assert bids[1]["quantity"] == 70
+
+    assert bids[2]["price"] == 12.00
+    assert bids[2]["quantity"] == 70
+
+    assert bids[3]["price"] == 14.00
+    assert bids[3]["quantity"] == 70
+
+
+def test_right_order_sells():
+    book = OrderBook()
+
+    book.add_order("sell", 12.00, 70)
+    book.add_order("sell", 14.00, 70)
+    book.add_order("sell", 8.00, 70)
+    book.add_order("sell", 10.00, 70)
+    asks = book.get_asks()
+
+    assert len(asks) == 4
+
+    assert asks[0]["price"] == 14.00
+    assert asks[0]["quantity"] == 70
+
+    assert asks[1]["price"] == 12.00
+    assert asks[1]["quantity"] == 70
+
+    assert asks[2]["price"] == 10.00
+    assert asks[2]["quantity"] == 70
+
+    assert asks[3]["price"] == 8.00
+    assert asks[3]["quantity"] == 70
+
 def test_same_price():
     book = OrderBook()
 
